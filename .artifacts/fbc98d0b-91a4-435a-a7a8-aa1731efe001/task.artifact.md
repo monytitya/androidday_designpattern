@@ -1,0 +1,5 @@
+- [ ] Enable AndroidX in `gradle.properties`
+- [ ] Add `activity-compose` to Version Catalog (`libs.versions.toml`)
+- [ ] Update `app/build.gradle.kts` with new dependencies
+- [ ] Refactor `MainActivity.kt` to host Compose UI
+- [ ] Verify build and sync status

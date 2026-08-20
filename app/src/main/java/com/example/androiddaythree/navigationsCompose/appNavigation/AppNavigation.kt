@@ -1,4 +1,4 @@
-package com.example.androiddaythree.NavigationsCompose.appNavigation
+package com.example.androiddaythree.navigationsCompose.appNavigation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,6 +20,7 @@ import kotlinx.serialization.Serializable
 // ១. កំណត់ Route សម្រាប់ HomeScreen និង DetailScreen ដោយប្រើ @Serializable
 @Serializable
 object HomeScreenRoute
+
 
 @Serializable
 data class DetailScreenRoute(val itemId: String)

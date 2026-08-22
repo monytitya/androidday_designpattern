@@ -1,34 +1,29 @@
-# Implementation Plan - Fix AndroidX Configuration and Integrate Compose Navigation
+# Implementation Plan - Fix MainActivity and Restore Animations Demo
 
-The build is currently failing because the `android.useAndroidX` property is missing from `gradle.properties`. Additionally, the `MainActivity` is still using traditional XML layouts while the project is being transitioned to Jetpack Compose with the new `AppNavigation`.
+The current project has several critical errors in `MainActivity.kt` and `AndroidAnimationModule.kt` following a package renaming and code changes. `MainActivity.kt` has a nested `onCreate` function, and `AndroidAnimationModule.kt` is currently empty.
 
 ## Proposed Changes
 
-### Build Configuration
-
-#### [MODIFY] [gradle.properties](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/gradle.properties)
-- Add `android.useAndroidX=true` and `android.enableJetifier=true` to enable AndroidX support.
-
-#### [MODIFY] [libs.versions.toml](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/gradle/libs.versions.toml)
-- Add `androidx-activity-compose` to the libraries section.
-- Use `2024.12.01` for `composeBom` as seen in the project logs.
-
-#### [MODIFY] [app/build.gradle.kts](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/build.gradle.kts)
-- Add `libs.androidx.activity.compose` to dependencies.
-- Ensure `libs.kotlinx.serialization.json` is correctly referenced.
-
-### UI Integration
+### MainActivity
 
 #### [MODIFY] [MainActivity.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/MainActivity.kt)
-- Change base class to `androidx.activity.ComponentActivity`.
-- Replace `setContentView(R.layout.activity_main)` with `setContent { AppNavigation() }`.
-- Remove unnecessary View-based window insets logic.
+- Remove the nested `onCreate` function.
+- Fix the `setContent` block to properly call `FullAnimationsDemoScreen`.
+- Replace the invalid `Annotation class AnimationDemoTheme` with a standard `MaterialTheme` wrapper or remove it if not defined.
+- Add `enableEdgeToEdge()` call.
+
+### Animations
+
+#### [MODIFY] [AndroidAnimationModule.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/animations/AndroidAnimationModule.kt)
+- Restore the `FullAnimationsDemoScreen` composable.
+- Clean up syntax errors (duplicate arguments, `TODO()` markers).
+- Implement a basic animation demo (e.g., AnimatedVisibility or AnimateContentSize) to ensure it's functional.
 
 ## Verification Plan
 
 ### Automated Tests
-- Run `gradle_sync` to verify the property changes.
-- Run `gradle_build app:assembleDebug` to ensure the project compiles.
+- Run `gradle_sync` to ensure no configuration issues.
+- Run `gradle_build app:assembleDebug` to verify the project compiles without errors.
 
 ### Manual Verification
-- Deploy the app to a device/emulator to verify that the `HomeScreen` from `AppNavigation` is displayed and navigation works.
+- Run the app to see the Animations Demo screen.

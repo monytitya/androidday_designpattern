@@ -1,5 +1,4 @@
-- [ ] Enable AndroidX in `gradle.properties`
-- [ ] Add `activity-compose` to Version Catalog (`libs.versions.toml`)
-- [ ] Update `app/build.gradle.kts` with new dependencies
-- [ ] Refactor `MainActivity.kt` to host Compose UI
-- [ ] Verify build and sync status
+- [x] Fix `MainActivity.kt` (remove nested `onCreate`, fix `setContent`)
+- [x] Implement `FullAnimationsDemoScreen` in `AndroidAnimationModule.kt`
+- [x] Fix Color reference (Orange) in `AndroidAnimationModule.kt`
+- [x] Verify build and run

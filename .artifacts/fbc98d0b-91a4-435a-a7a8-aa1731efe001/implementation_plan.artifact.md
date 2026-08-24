@@ -1,29 +1,44 @@
-# Implementation Plan - Fix MainActivity and Restore Animations Demo
+# Implementation Plan - Ecommerce App with Advanced Animations
 
-The current project has several critical errors in `MainActivity.kt` and `AndroidAnimationModule.kt` following a package renaming and code changes. `MainActivity.kt` has a nested `onCreate` function, and `AndroidAnimationModule.kt` is currently empty.
+Build a full-featured ecommerce app demo based on the provided design, utilizing Jetpack Compose's latest animation capabilities, specifically Shared Element Transitions.
+
+## User Review Required
+
+> [!IMPORTANT]
+> I will be using `SharedTransitionLayout` which is part of Compose 1.7.0+. Your project is already configured with Compose BOM 2024.12.01, so it is compatible. I will create a new package `com.example.androiddaythree.ecommerce` to keep this clean.
 
 ## Proposed Changes
 
-### MainActivity
+### Data & Models
+- **[NEW] Product.kt**: Data model for shoes (id, name, price, description, imageRes).
+- **[NEW] SampleData.kt**: Pre-populated list of shoe products.
 
-#### [MODIFY] [MainActivity.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/MainActivity.kt)
-- Remove the nested `onCreate` function.
-- Fix the `setContent` block to properly call `FullAnimationsDemoScreen`.
-- Replace the invalid `Annotation class AnimationDemoTheme` with a standard `MaterialTheme` wrapper or remove it if not defined.
-- Add `enableEdgeToEdge()` call.
+### Theme
+- **[NEW] EcommerceTheme.kt**: Custom Material3 theme with yellow accent (`0xFFFFD700`) and modern typography.
 
-### Animations
+### Components
+- **[NEW] ProductCard.kt**: The source for shared element transitions.
+- **[NEW] CategoryChip.kt**: Interactive chips for brand filtering.
+- **[NEW] CartItem.kt**: List item for the cart with quantity controls.
 
-#### [MODIFY] [AndroidAnimationModule.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/animations/AndroidAnimationModule.kt)
-- Restore the `FullAnimationsDemoScreen` composable.
-- Clean up syntax errors (duplicate arguments, `TODO()` markers).
-- Implement a basic animation demo (e.g., AnimatedVisibility or AnimateContentSize) to ensure it's functional.
+### Screens
+- **[NEW] HomeScreen.kt**: Features top bar, sale banner, and horizontal/vertical product lists.
+- **[NEW] DetailScreen.kt**: Target for shared element transition, featuring product details and size selection.
+- **[NEW] CartScreen.kt**: Displays items with animated removal.
+
+### Navigation
+- **[NEW] EcommerceNavigation.kt**: Type-safe navigation setup using `SharedTransitionLayout` context.
+
+### Main Integration
+- **[MODIFY] MainActivity.kt**: Set the `EcommerceApp` as the main content.
 
 ## Verification Plan
 
 ### Automated Tests
-- Run `gradle_sync` to ensure no configuration issues.
-- Run `gradle_build app:assembleDebug` to verify the project compiles without errors.
+- Run `gradle_sync` to ensure all imports are valid.
+- Run `gradle_build app:assembleDebug` to verify compilation.
 
 ### Manual Verification
-- Run the app to see the Animations Demo screen.
+- Verify that clicking a product on the Home screen triggers a smooth **Shared Element Transition** to the Detail screen.
+- Verify that removing an item from the cart uses **AnimatedVisibility** for a smooth exit.
+- Verify the **Bottom Navigation** correctly switches between screens.

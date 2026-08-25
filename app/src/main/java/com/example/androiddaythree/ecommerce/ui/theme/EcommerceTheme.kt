@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.Color
 
 val ShoeYellow = Color(0xFFFFD700)
 val ShoeBlack = Color(0xFF1A1A1A)
-val ShoeGrey = Color(0xFF9E9E9E)
 val LightGrey = Color(0xFFF5F5F5)
 
 private val LightColorScheme = lightColorScheme(

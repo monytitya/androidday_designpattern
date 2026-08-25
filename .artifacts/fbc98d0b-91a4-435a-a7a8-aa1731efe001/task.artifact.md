@@ -1,4 +1,4 @@
-- [x] Update `SampleData.kt` with new products and categories
-- [x] Fix compilation errors by removing missing drawable references
-- [x] Revert `HomeScreen.kt` banner to color background for stability
-- [x] Verify project builds successfully
+- [x] Map image resources in `SampleData.kt`
+- [x] Refactor `HomeScreen.kt` to `LazyColumn` for performance
+- [x] Implement cart +/- logic in `CartScreen.kt`
+- [x] Verify build status

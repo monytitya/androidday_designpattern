@@ -60,7 +60,7 @@ fun DetailScreen(
                 IconButton(onClick = onBack) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
                 }
-                Text(text = "Details Products", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text(text = "Prodcuts details", fontWeight = FontWeight.Black, fontSize = 18.sp)
                 IconButton(onClick = { }) {
                     Icon(Icons.Default.MoreVert, contentDescription = null)
                 }

@@ -1,6 +1,7 @@
 package com.example.androiddaythree.ecommerce.data
 
-// import com.example.androiddaythree.R // Uncomment after adding images to drawable folder
+import android.R.attr.id
+import com.example.androiddaythree.R
 
 val sampleProducts = listOf(
     Product(
@@ -11,7 +12,7 @@ val sampleProducts = listOf(
         originalPrice = 129.99,
         description = "High-fidelity sound with Active Noise Cancellation. Comfortable over-ear design for long listening sessions.",
         type = "Electronics",
-        images = listOf() // Add R.drawable.picun_headphones here
+        images = listOf(R.drawable.img_1)
     ),
     Product(
         id = 2,
@@ -20,7 +21,7 @@ val sampleProducts = listOf(
         price = 59.99,
         description = "Pure bass, wireless freedom. 40 hours of battery life and smart touch controls.",
         type = "Electronics",
-        images = listOf() // Add R.drawable.realme_buds here
+        images = listOf(R.drawable.img_2)
     ),
     Product(
         id = 3,
@@ -29,7 +30,7 @@ val sampleProducts = listOf(
         price = 19.99,
         description = "Classic wired connection with crystal clear audio and tangle-free cable.",
         type = "Electronics",
-        images = listOf() // Add R.drawable.wired_earbuds here
+        images = listOf(R.drawable.img_3)
     ),
     Product(
         id = 4,
@@ -39,7 +40,7 @@ val sampleProducts = listOf(
         originalPrice = 999.00,
         description = "Powerful performance meets sleek design. Perfect for work, study, and creative projects.",
         type = "Electronics",
-        images = listOf() // Add R.drawable.laptop here
+        images = listOf(R.drawable.img_4)
     ),
     Product(
         id = 5,
@@ -48,7 +49,7 @@ val sampleProducts = listOf(
         price = 45.50,
         description = "RGB mechanical feel keyboard with high-precision gaming mouse. Elevate your gaming experience.",
         type = "Gaming",
-        images = listOf() // Add R.drawable.gaming_gear here
+        images = listOf(R.drawable.img_5)
     ),
     Product(
         id = 6,
@@ -57,7 +58,7 @@ val sampleProducts = listOf(
         price = 120.11,
         description = "Styled for the '70s. Loved in the '80s. Classic in the '90s. Ready for the future.",
         type = "Women's Shoes",
-        images = listOf()
+        images = listOf(R.drawable.img_6)
     )
 )
 

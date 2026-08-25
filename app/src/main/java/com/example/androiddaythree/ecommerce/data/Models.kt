@@ -10,8 +10,8 @@ data class Product(
     val price: Double,
     val originalPrice: Double? = null,
     val description: String,
-    val type: String, // e.g. "Woman's Shoes"
-    val images: List<Int>, // Resource IDs
+    val type: String,
+    val images: List<Int>,
     val rating: Double = 4.5,
     val reviews: Int = 10000
 )

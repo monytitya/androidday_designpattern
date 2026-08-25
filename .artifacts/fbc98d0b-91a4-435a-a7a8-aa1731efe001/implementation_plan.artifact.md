@@ -1,37 +1,36 @@
-# Implementation Plan - Add New Products and Update Banner
+# Implementation Plan - Ecommerce App Enhancements
 
-Update the Ecommerce app with new products (Headphones, Earbuds, Laptop, Gaming Gear) and enhance the home screen banner with an image.
+This plan covers integrating image resources, implementing cart quantity logic, and optimizing scroll performance.
 
 ## User Review Required
 
 > [!IMPORTANT]
-> I will use placeholder resource IDs (e.g., `R.drawable.picun_headphones`) for the new images. You will need to add the actual image files to your `app/src/main/res/drawable` folder with these exact names for the app to compile and display them.
+> I will be updating your `CartScreen` to use a mutable list state. This ensures that when you click `+` or `-`, the UI updates instantly and the subtotal/total are recalculated.
 
 ## Proposed Changes
 
-### Data Layer
+### 1. Visual Integration (Images)
+- **[MODIFY] [SampleData.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/data/SampleData.kt)**: Map `img_1` to `img_6` and `banner` to the product list.
+- **[MODIFY] [HomeScreen.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/ui/screens/HomeScreen.kt)**: Enable the banner image and set it to `R.drawable.banner`.
 
-#### [MODIFY] [SampleData.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/data/SampleData.kt)
-- Add new `Product` instances for:
-    - Picun Headphones
-    - Realme Buds
-    - Wired Earbuds
-    - Modern Laptop
-    - Gaming Keyboard & Mouse
-- Update `sampleCategories` to include "Electronics" and "Gaming".
+### 2. Cart Logic (+/- Buttons)
+- **[MODIFY] [CartScreen.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/ui/screens/CartScreen.kt)**:
+    - Change `cartItems` to use `mutableStateListOf` for reactive updates.
+    - Implement `onIncrease` and `onDecrease` functions to update item quantities.
+    - Ensure items are removed if quantity reaches zero.
 
-### UI Components
+### 3. Performance & Smooth Scrolling
+- **[MODIFY] [HomeScreen.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/ui/screens/HomeScreen.kt)**:
+    - Replace the `Column` + `verticalScroll` with a `LazyColumn` for the main layout. This is essential for smooth scrolling in long lists.
+    - Move headers and banners into `item { ... }` blocks within the `LazyColumn`.
 
-#### [MODIFY] [HomeScreen.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/ui/screens/HomeScreen.kt)
-- Update the **Sale Banner** to include an `Image` component using a new banner resource.
-- Adjust the text layout in the banner to overlay correctly on the image.
-
-### Verification Plan
+## Verification Plan
 
 ### Automated Tests
-- Run `gradle_sync` to verify no syntax errors were introduced.
-- Build the project (will require the user to add the images first).
+- Run `gradle_sync` to verify resource mapping.
+- Run `gradle_build app:assembleDebug`.
 
 ### Manual Verification
-- Check the Home screen to see the new categories and products.
-- Verify the banner looks modern with the background image.
+- **Images**: Verify the banner and product images appear correctly.
+- **Cart**: Click `+` and `-` on cart items; verify the quantity changes and the bottom total updates.
+- **Scrolling**: Swipe up and down on the Home screen to confirm a buttery-smooth 60fps+ experience.

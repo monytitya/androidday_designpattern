@@ -21,6 +21,10 @@ import androidx.compose.ui.unit.sp
 import com.example.androiddaythree.ecommerce.data.Product
 import com.example.androiddaythree.ecommerce.ui.theme.LightGrey
 
+import androidx.compose.foundation.Image
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+
 @OptIn(androidx.compose.animation.ExperimentalSharedTransitionApi::class)
 @Composable
 fun ProductCard(
@@ -44,7 +48,6 @@ fun ProductCard(
                     .height(180.dp)
                     .clip(RoundedCornerShape(24.dp))
                     .background(LightGrey)
-                    .padding(16.dp)
             ) {
                 with(sharedTransitionScope) {
                     Box(
@@ -53,18 +56,32 @@ fun ProductCard(
                             .sharedElement(
                                 rememberSharedContentState(key = "product_image_${product.id}"),
                                 animatedVisibilityScope = animatedContentScope
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (product.images.isNotEmpty()) {
+                            Image(
+                                painter = painterResource(id = product.images.first()),
+                                contentDescription = null,
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = ContentScale.Fit
                             )
-                            .background(
-                                // Different color for each product for demo
-                                color = when (product.id % 4) {
-                                    1 -> Color.Red
-                                    2 -> Color.Blue
-                                    3 -> Color.Green
-                                    else -> Color.Black
-                                },
-                                shape = RoundedCornerShape(16.dp)
+                        } else {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize(0.7f)
+                                    .background(
+                                        color = when (product.id % 4) {
+                                            1 -> Color.Red
+                                            2 -> Color.Blue
+                                            3 -> Color.Green
+                                            else -> Color.Black
+                                        },
+                                        shape = RoundedCornerShape(16.dp)
+                                    )
                             )
-                    )
+                        }
+                    }
                 }
 
                 IconButton(

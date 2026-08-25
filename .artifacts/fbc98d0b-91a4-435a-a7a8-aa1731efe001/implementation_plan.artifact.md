@@ -1,44 +1,37 @@
-# Implementation Plan - Ecommerce App with Advanced Animations
+# Implementation Plan - Add New Products and Update Banner
 
-Build a full-featured ecommerce app demo based on the provided design, utilizing Jetpack Compose's latest animation capabilities, specifically Shared Element Transitions.
+Update the Ecommerce app with new products (Headphones, Earbuds, Laptop, Gaming Gear) and enhance the home screen banner with an image.
 
 ## User Review Required
 
 > [!IMPORTANT]
-> I will be using `SharedTransitionLayout` which is part of Compose 1.7.0+. Your project is already configured with Compose BOM 2024.12.01, so it is compatible. I will create a new package `com.example.androiddaythree.ecommerce` to keep this clean.
+> I will use placeholder resource IDs (e.g., `R.drawable.picun_headphones`) for the new images. You will need to add the actual image files to your `app/src/main/res/drawable` folder with these exact names for the app to compile and display them.
 
 ## Proposed Changes
 
-### Data & Models
-- **[NEW] Product.kt**: Data model for shoes (id, name, price, description, imageRes).
-- **[NEW] SampleData.kt**: Pre-populated list of shoe products.
+### Data Layer
 
-### Theme
-- **[NEW] EcommerceTheme.kt**: Custom Material3 theme with yellow accent (`0xFFFFD700`) and modern typography.
+#### [MODIFY] [SampleData.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/data/SampleData.kt)
+- Add new `Product` instances for:
+    - Picun Headphones
+    - Realme Buds
+    - Wired Earbuds
+    - Modern Laptop
+    - Gaming Keyboard & Mouse
+- Update `sampleCategories` to include "Electronics" and "Gaming".
 
-### Components
-- **[NEW] ProductCard.kt**: The source for shared element transitions.
-- **[NEW] CategoryChip.kt**: Interactive chips for brand filtering.
-- **[NEW] CartItem.kt**: List item for the cart with quantity controls.
+### UI Components
 
-### Screens
-- **[NEW] HomeScreen.kt**: Features top bar, sale banner, and horizontal/vertical product lists.
-- **[NEW] DetailScreen.kt**: Target for shared element transition, featuring product details and size selection.
-- **[NEW] CartScreen.kt**: Displays items with animated removal.
+#### [MODIFY] [HomeScreen.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/ui/screens/HomeScreen.kt)
+- Update the **Sale Banner** to include an `Image` component using a new banner resource.
+- Adjust the text layout in the banner to overlay correctly on the image.
 
-### Navigation
-- **[NEW] EcommerceNavigation.kt**: Type-safe navigation setup using `SharedTransitionLayout` context.
-
-### Main Integration
-- **[MODIFY] MainActivity.kt**: Set the `EcommerceApp` as the main content.
-
-## Verification Plan
+### Verification Plan
 
 ### Automated Tests
-- Run `gradle_sync` to ensure all imports are valid.
-- Run `gradle_build app:assembleDebug` to verify compilation.
+- Run `gradle_sync` to verify no syntax errors were introduced.
+- Build the project (will require the user to add the images first).
 
 ### Manual Verification
-- Verify that clicking a product on the Home screen triggers a smooth **Shared Element Transition** to the Detail screen.
-- Verify that removing an item from the cart uses **AnimatedVisibility** for a smooth exit.
-- Verify the **Bottom Navigation** correctly switches between screens.
+- Check the Home screen to see the new categories and products.
+- Verify the banner looks modern with the background image.

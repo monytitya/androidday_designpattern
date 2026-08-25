@@ -27,6 +27,11 @@ import com.example.androiddaythree.ecommerce.ui.components.CategoryChip
 import com.example.androiddaythree.ecommerce.ui.components.ProductCard
 import com.example.androiddaythree.ecommerce.ui.theme.ShoeBlack
 
+import androidx.compose.foundation.Image
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import com.example.androiddaythree.R
+
 @OptIn(androidx.compose.animation.ExperimentalSharedTransitionApi::class)
 @Composable
 fun HomeScreen(
@@ -66,10 +71,30 @@ fun HomeScreen(
                 .height(160.dp)
                 .clip(RoundedCornerShape(24.dp))
                 .background(ShoeBlack)
-                .padding(24.dp)
         ) {
-            Column(modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.Center) {
-                Text(text = "Get your\nspecial sale\nup to 50%", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            // Background Image (Uncomment after adding R.drawable.sale_banner)
+            /*
+            Image(
+                painter = painterResource(id = R.drawable.sale_banner),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+                alpha = 0.6f
+            )
+            */
+
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(24.dp),
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "Get your\nspecial sale\nup to 50%",
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
                 Spacer(modifier = Modifier.height(12.dp))
                 Button(
                     onClick = { },

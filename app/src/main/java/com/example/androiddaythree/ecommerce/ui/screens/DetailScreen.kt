@@ -25,6 +25,10 @@ import androidx.compose.ui.unit.sp
 import com.example.androiddaythree.ecommerce.data.sampleProducts
 import com.example.androiddaythree.ecommerce.ui.theme.LightGrey
 
+import androidx.compose.foundation.Image
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+
 @OptIn(androidx.compose.animation.ExperimentalSharedTransitionApi::class)
 @Composable
 fun DetailScreen(
@@ -79,16 +83,31 @@ fun DetailScreen(
                             .sharedElement(
                                 rememberSharedContentState(key = "product_image_${product.id}"),
                                 animatedVisibilityScope = animatedContentScope
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (product.images.isNotEmpty()) {
+                            Image(
+                                painter = painterResource(id = product.images.first()),
+                                contentDescription = null,
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = ContentScale.Fit
                             )
-                            .background(
-                                color = when (product.id % 4) {
-                                    1 -> Color.Red
-                                    2 -> Color.Blue
-                                    3 -> Color.Green
-                                    else -> Color.Black
-                                }
+                        } else {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize(0.6f)
+                                    .background(
+                                        color = when (product.id % 4) {
+                                            1 -> Color.Red
+                                            2 -> Color.Blue
+                                            3 -> Color.Green
+                                            else -> Color.Black
+                                        }
+                                    )
                             )
-                    )
+                        }
+                    }
                 }
             }
 

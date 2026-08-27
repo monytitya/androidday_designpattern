@@ -1,36 +1,32 @@
-# Implementation Plan - Ecommerce App Enhancements
+# Implementation Plan - Scroll Performance Optimization & Bug Fixes
 
-This plan covers integrating image resources, implementing cart quantity logic, and optimizing scroll performance.
-
-## User Review Required
-
-> [!IMPORTANT]
-> I will be updating your `CartScreen` to use a mutable list state. This ensures that when you click `+` or `-`, the UI updates instantly and the subtotal/total are recalculated.
+Identify and resolve performance bottlenecks in the Ecommerce app, specifically focusing on smooth scrolling in `LazyColumn` and `LazyRow` components.
 
 ## Proposed Changes
 
-### 1. Visual Integration (Images)
-- **[MODIFY] [SampleData.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/data/SampleData.kt)**: Map `img_1` to `img_6` and `banner` to the product list.
-- **[MODIFY] [HomeScreen.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/ui/screens/HomeScreen.kt)**: Enable the banner image and set it to `R.drawable.banner`.
+### Performance Optimization
 
-### 2. Cart Logic (+/- Buttons)
-- **[MODIFY] [CartScreen.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/ui/screens/CartScreen.kt)**:
-    - Change `cartItems` to use `mutableStateListOf` for reactive updates.
-    - Implement `onIncrease` and `onDecrease` functions to update item quantities.
-    - Ensure items are removed if quantity reaches zero.
+#### [MODIFY] [HomeScreen.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/ui/screens/HomeScreen.kt)
+- Add unique `key` parameters to all `items(...)` calls in `LazyColumn` and `LazyRow`. This allows Compose to reuse items efficiently instead of re-composing them during scroll.
+- Add `contentType` to items to help the list manage recycling more effectively.
+- Wrap brand filtering logic and product lists in `remember` or `derivedStateOf` if heavy processing is detected.
 
-### 3. Performance & Smooth Scrolling
-- **[MODIFY] [HomeScreen.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/ui/screens/HomeScreen.kt)**:
-    - Replace the `Column` + `verticalScroll` with a `LazyColumn` for the main layout. This is essential for smooth scrolling in long lists.
-    - Move headers and banners into `item { ... }` blocks within the `LazyColumn`.
+#### [MODIFY] [CommonComponents.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/ui/components/CommonComponents.kt)
+- Optimize `ProductCard` to ensure it is as "skipable" as possible by avoiding unnecessary state changes.
+- Ensure `painterResource` usage is efficient (Compose handles caching, but we can verify there are no redundant calls).
+
+#### [MODIFY] [CartScreen.kt](file:///C:/Android2026/ANDROIDS26/ANdroidDaythree/app/src/main/java/com/example/androiddaythree/ecommerce/ui/screens/CartScreen.kt)
+- Ensure the `CartItemRow` uses keys correctly (it already does, but I'll double-check for any overhead).
+
+### Bug Fixes
+- Double-check for any typos or missing logic in the +/- quantity buttons (already implemented, but will refine for stability).
+- Fix the "Prodcuts details" typo in `DetailScreen.kt`.
 
 ## Verification Plan
 
 ### Automated Tests
-- Run `gradle_sync` to verify resource mapping.
-- Run `gradle_build app:assembleDebug`.
+- Run `gradle_build` to ensure no regressions.
 
 ### Manual Verification
-- **Images**: Verify the banner and product images appear correctly.
-- **Cart**: Click `+` and `-` on cart items; verify the quantity changes and the bottom total updates.
-- **Scrolling**: Swipe up and down on the Home screen to confirm a buttery-smooth 60fps+ experience.
+- Use the **Layout Inspector** and **Recomposition Counter** in Android Studio to verify that items are being reused and not re-composed during scroll.
+- Perform "fling" gestures on the Home screen to verify buttery-smooth scrolling (aiming for 60/120fps).

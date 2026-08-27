@@ -1,4 +1,4 @@
-- [x] Map image resources in `SampleData.kt`
-- [x] Refactor `HomeScreen.kt` to `LazyColumn` for performance
-- [x] Implement cart +/- logic in `CartScreen.kt`
-- [x] Verify build status
+- [ ] Add `key` and `contentType` to `LazyColumn` and `LazyRow` in `HomeScreen.kt`
+- [ ] Fix "Prodcuts details" typo in `DetailScreen.kt`
+- [ ] Ensure unique keys in `CartScreen.kt`
+- [ ] Verify build and scroll performance

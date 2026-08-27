@@ -45,7 +45,7 @@ fun HomeScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         // Top Bar
-        item {
+        item(key = "top_bar", contentType = "header") {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -61,7 +61,8 @@ fun HomeScreen(
             }
         }
 
-        item {
+        // Sale Banner
+        item(key = "sale_banner", contentType = "banner") {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -100,7 +101,9 @@ fun HomeScreen(
                 }
             }
         }
-        item {
+
+        // New Arrival Header
+        item(key = "new_arrival_header", contentType = "header") {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(text = "New Arrival", fontWeight = FontWeight.Bold, fontSize = 18.sp)
                 Text(text = "See all", color = Color.Gray, fontSize = 14.sp)
@@ -108,9 +111,16 @@ fun HomeScreen(
         }
 
         // Categories
-        item {
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                items(sampleCategories) { category ->
+        item(key = "categories_list", contentType = "list") {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                items(
+                    items = sampleCategories,
+                    key = { it },
+                    contentType = { "category" }
+                ) { category ->
                     CategoryChip(
                         category = category,
                         isSelected = selectedCategory == category,
@@ -121,12 +131,16 @@ fun HomeScreen(
         }
 
         // Product Grid (Horizontal)
-        item {
+        item(key = "product_list", contentType = "list") {
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(bottom = 8.dp)
             ) {
-                items(sampleProducts) { product ->
+                items(
+                    items = sampleProducts,
+                    key = { it.id },
+                    contentType = { "product_card" }
+                ) { product ->
                     ProductCard(
                         product = product,
                         sharedTransitionScope = sharedTransitionScope,
@@ -136,7 +150,9 @@ fun HomeScreen(
                 }
             }
         }
-        item {
+
+        // Best Seller Header
+        item(key = "best_seller_header", contentType = "header") {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(text = "Best Seller", fontWeight = FontWeight.Bold, fontSize = 18.sp)
                 Text(text = "See all", color = Color.Gray, fontSize = 14.sp)
@@ -144,7 +160,11 @@ fun HomeScreen(
         }
         
         // Best Seller Items
-        items(sampleProducts.takeLast(2)) { product ->
+        items(
+            items = sampleProducts.takeLast(2),
+            key = { "best_seller_${it.id}" },
+            contentType = { "best_seller_item" }
+        ) { product ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

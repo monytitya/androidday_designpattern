@@ -57,7 +57,11 @@ fun CartScreen(onBack: () -> Unit) {
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(cartItems, key = { it.product.id }) { item ->
+            items(
+                items = cartItems,
+                key = { it.product.id },
+                contentType = { "cart_item" }
+            ) { item ->
                 CartItemRow(
                     item = item,
                     onIncrease = { 
